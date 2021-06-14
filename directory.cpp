@@ -24,6 +24,8 @@ class directory{
     //  Function to search the name of person with given number
     void update_number(char* name);
     //  Function to update the data of the specified person
+    void delete_record(char* name);
+    //  Function to delete the record from the directory.
 };
 
 void directory::enter_record()
@@ -128,6 +130,25 @@ void directory::update_number(char* name)
     }
 }
 
+void directory::delete_record(char *name)
+{
+    fstream file("directory.dat",ios::in|ios::out|ios::app|ios::binary);
+    fstream new_file;
+    new_file.open("dummy.dat",ios::out|ios::app|ios::binary);
+    while(file.read((char*)this,sizeof(*this)))
+    {
+        if(strcmp(this->name,name))
+        {
+            new_file.write((char*)this,sizeof(*this));
+        }        
+    }
+        file.close();
+        new_file.close();
+        remove("directory.dat");
+        rename("dummy.dat","directory.dat");
+        // new_file.close();
+}
+
 int main()
 {
     directory direc;
@@ -173,6 +194,7 @@ int main()
             case 6:
             remove("directory.dat");
             cout<<"Directory erased successfully."<<endl;
+            break;
             case 7:
             break;
             default:
@@ -180,5 +202,10 @@ int main()
             break;
         }
     }
+    cout<<"delete"<<endl;
+    cin>>name;
+    direc.delete_record(name);
+    cout<<"print"<<endl;
+    direc.display();
     return 0;
 }
