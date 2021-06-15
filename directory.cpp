@@ -72,7 +72,7 @@ void directory::display()
     fstream file("directory.dat",ios::in|ios::app|ios::binary);
     while(file.read((char*)this,sizeof(*this)))   // input data from file
     {
-    cout<<"\t"<<this->name<<"\t"<<this->telephone<<"\t"<<this->email<<endl;
+    cout<<"\t"<<this->name<<"\t   "<<this->telephone<<"\t\t"<<this->email<<endl;
     }
     file.close();
 }
@@ -198,7 +198,7 @@ int main()
         cout<<"4. Search the name and email address"<<endl;  // takes phone number as input and based on it searches the details of the person.
         cout<<"5. Update the Details"<<endl;
         cout<<"6. Delete a contact "<<endl;
-        cout<<"7. Erase all contact from the directory"<<endl;
+        cout<<"7. Erase all contacts from the directory"<<endl;
         cout<<"8. EXIT"<<endl;
         cout<<"Enter your choice: ";
         cin>>choice;
