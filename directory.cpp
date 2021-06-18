@@ -67,12 +67,12 @@ void directory::enter_record()
 
 void directory::display()
 {
-    cout<<"\n\tName\tTelephone Number\tEmail address\n";
+    cout<<"\n\tName\t   Telephone Number\t   Email address\n";
     cout<<"--------------------------------------------------------------------"<<endl;
     fstream file("directory.dat",ios::in|ios::app|ios::binary);
     while(file.read((char*)this,sizeof(*this)))   // input data from file
     {
-    cout<<"\t"<<this->name<<"\t   "<<this->telephone<<"\t\t"<<this->email<<endl;
+    cout<<"\t"<<this->name<<"   \t"<<this->telephone<<"      \t"<<this->email<<endl;
     }
     file.close();
 }
@@ -133,7 +133,6 @@ void directory::update_number(char* name)
     {
         if(strcmp(this->name,name)==0)
         {
-            
             cout<<"Enter the updated mobile number: ";
             cin>>this->telephone;
             cout<<"\nEnter the updated email address: ";
@@ -160,7 +159,7 @@ void directory::delete_record(char *name)
     fstream new_file;
     new_file.open("dummy.dat",ios::out|ios::app|ios::binary);
     while(file.read((char*)this,sizeof(*this)))
-
+    {
         if(strcmp(this->name,name)==0)
     {
             flag = true;
@@ -168,7 +167,8 @@ void directory::delete_record(char *name)
         if(strcmp(this->name,name))
         {
             new_file.write((char*)this,sizeof(*this));
-        }        
+        }   
+    }     
         file.close();
         new_file.close();
         remove("directory.dat");
