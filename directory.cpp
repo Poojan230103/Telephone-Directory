@@ -28,7 +28,9 @@ class directory{
     //  Function to delete the record from the directory.
 };
 
-bool check_digits(char* number)
+bool check_digits(char* number)   // Not a member function of directory class.
+
+//This function checks whether the number of digits in the telephone number are equal to 10 or not.
 {
     if(strlen(number)==10)
     {
@@ -60,7 +62,7 @@ void directory::enter_record()
     cin>>this->email;
     cout<<"\n";
 
-    fstream file("directory.dat", ios::out|ios::app|ios::binary); 
+    fstream file("directory.dat", ios::out|ios::app|ios::binary);
     file.write((char*)this,sizeof(*this));   // write the into the "directory.dat" value to the file
     file.close();
 }
@@ -155,11 +157,12 @@ void directory::update_number(char* name)
 void directory::delete_record(char *name)
 {
     bool flag = false;
-    fstream file("directory.dat",ios::in|ios::out|ios::app|ios::binary);
+    fstream file("directory.dat",ios::in|ios::app|ios::binary);
     fstream new_file;
     new_file.open("dummy.dat",ios::out|ios::app|ios::binary);
     while(file.read((char*)this,sizeof(*this)))
     {
+
         if(strcmp(this->name,name)==0)
     {
             flag = true;
@@ -167,8 +170,8 @@ void directory::delete_record(char *name)
         if(strcmp(this->name,name))
         {
             new_file.write((char*)this,sizeof(*this));
-        }   
-    }     
+        }
+    }
         file.close();
         new_file.close();
         remove("directory.dat");
